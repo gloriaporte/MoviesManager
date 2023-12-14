@@ -32,7 +32,7 @@ enum class Gender (
     ),
     FOUND_FOOTAGE (
         "Found Footage",
-        R.drawable.baseline_videocam_24
+//        R.drawable.baseline_videocam_24
     ),
     DRAMA (
         "Drama",
