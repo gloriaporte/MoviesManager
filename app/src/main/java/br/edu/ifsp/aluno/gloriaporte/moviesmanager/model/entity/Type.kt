@@ -1,4 +1,16 @@
 package br.edu.ifsp.aluno.gloriaporte.moviesmanager.model.entity
+import br.edu.ifsp.aluno.gloriaporte.moviesmanager.R
 
-class Type {
+enum class Type (
+    private val description: String,
+    val icon: Int = R.drawable.baseline_list_24
+) {
+    VHS (
+        "VHS",
+        R.mipmap.ic_heart
+    ),
+    DVD (
+        "DVD",
+        //icone
+    )
 }
