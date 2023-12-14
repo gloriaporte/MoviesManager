@@ -6,11 +6,14 @@ import androidx.room.PrimaryKey
 @Entity
 class Movie (
     @PrimaryKey(autoGenerate = true)
-    val name:String,
+    val id: Long = 0,
+    val name: String,
     val production: String,
     val minutes: Long,
-    val watched: Int,
-    val stars: Int,
+    val watched: Boolean = false,
+    val stars: Int? = null,
     val genre: String,
-    val imagePath: String
+    val imagePath: String,
+    val type: String,
+    val releasedYear: String
 )
