@@ -3,11 +3,13 @@ package br.edu.ifsp.aluno.gloriaporte.moviesmanager.view
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.R
+import br.edu.ifsp.aluno.gloriaporte.moviesmanager.controller.MovieViewModel
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -28,8 +30,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            navController.navigate((R.id.action_FirstFragment_to_createMovieFragment))
         }
     }
 

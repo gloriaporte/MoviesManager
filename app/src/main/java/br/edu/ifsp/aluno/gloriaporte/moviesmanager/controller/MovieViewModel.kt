@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.model.database.MovieDatabase
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.model.entity.Movie
@@ -12,7 +13,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MovieViewModel(application: Application): AndroidViewModel(application) {
-    private val movieDaoImpl = MovieDatabase.getDatabase(application).MovieDAO()
+    private val movieDaoImpl = Room.databaseBuilder(
+        application.applicationContext,
+        MovieDatabase::class.java,
+        MovieDatabase.MOVIE_DATABASE
+    ).build().movieDao()
 
     //Lista dos filmes
     val allMovies = MutableLiveData<MutableList<Movie>>()

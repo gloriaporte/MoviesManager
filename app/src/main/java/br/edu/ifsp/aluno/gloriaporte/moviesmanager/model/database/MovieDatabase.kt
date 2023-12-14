@@ -7,25 +7,35 @@ import androidx.room.RoomDatabase
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.model.dao.MovieDAO
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.model.entity.Movie
 
-@Database(entities = [Movie::class], version = 1)
-abstract class MovieDatabase: RoomDatabase() {
-    abstract fun MovieDAO(): MovieDAO
+@Database(entities = [Movie::class], version = 1, exportSchema = false)
+abstract class MovieDatabase : RoomDatabase() {
 
-    companion object {
-        @Volatile
-        private var INSTANCE: MovieDatabase?=null
-        const val MOVIE_DATABASE = "MovieDatabase"
+    abstract fun movieDao(): MovieDAO
 
-        fun getDatabase(context: Context): MovieDatabase {
-            return INSTANCE?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    MovieDatabase::class.java,
-                    "database.bd"
-                ).build()
-                INSTANCE = instance
-                instance
-            }
+        companion object {
+            const val MOVIE_DATABASE = "movieDatabase"
         }
-    }
+
+//    companion object {
+//        const val MOVIE_DATABASE = "moviesManagerDatabase"
+//
+//        @Volatile
+//        private var INSTANCE: MovieDatabase? = null
+//
+//        fun getDatabase(context: Context): MovieDatabase {
+//            val tempInstance = INSTANCE
+//            if (tempInstance != null) {
+//                return tempInstance
+//            }
+//            synchronized(this) {
+//                val instance = Room.databaseBuilder(
+//                    context.applicationContext,
+//                    MovieDatabase::class.java,
+//                    "movie_database"
+//                ).build()
+//                INSTANCE = instance
+//                return instance
+//            }
+//        }
+//    }
 }

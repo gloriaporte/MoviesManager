@@ -1,60 +1,154 @@
 package br.edu.ifsp.aluno.gloriaporte.moviesmanager.view
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.motion.widget.TransitionBuilder.validate
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.R
+import br.edu.ifsp.aluno.gloriaporte.moviesmanager.controller.MovieViewModel
+import br.edu.ifsp.aluno.gloriaporte.moviesmanager.controller.MovieViewModelFactory
+import br.edu.ifsp.aluno.gloriaporte.moviesmanager.databinding.FragmentCreateMovieBinding
+import br.edu.ifsp.aluno.gloriaporte.moviesmanager.model.entity.Movie
+import br.edu.ifsp.aluno.gloriaporte.moviesmanager.view.adapter.GenderAdapter
+import br.edu.ifsp.aluno.gloriaporte.moviesmanager.view.adapter.MovieAdapter
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.output.ByteArrayOutputStream
+import java.io.IOException
+import java.io.InputStream
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CreateMovieFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CreateMovieFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var fragmentCreateMovieBinding: FragmentCreateMovieBinding
+    private lateinit var viewModel: MovieViewModel
+    private var selectedImageUri: Uri? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val factory = MovieViewModelFactory(requireActivity().application)
+        fragmentCreateMovieBinding = FragmentCreateMovieBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this, factory).get(MovieViewModel::class.java)
+
+        fragmentCreateMovieBinding.apply {
+            (activity as? AppCompatActivity)?.supportActionBar?.subtitle = getString(R.string.create_movie)
+            fragmentCreateMovieBinding.commonLayout.imgIV.visibility = View.GONE
+        }
+        return fragmentCreateMovieBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val imageButton = fragmentCreateMovieBinding.commonLayout.imageBT
+
+        imageButton.setOnClickListener {
+            openGallery()
+        }
+
+
+        viewModel = ViewModelProvider(this)[MovieViewModel::class.java]
+
+        val commonLayout = fragmentCreateMovieBinding.commonLayout
+
+        commonLayout.imageBT.setOnClickListener {
+            openGallery()
+        }
+
+        fragmentCreateMovieBinding.commonLayout.saveBt.setOnClickListener {
+            if(validate()) {
+                val name = commonLayout.nameET.text.toString()
+                val releasedYear = commonLayout.releasedYearET.text.toString()
+                val production = commonLayout.productionET.text.toString()
+                val minutes = commonLayout.minutesET.text.toString().toLong()
+                val watched = commonLayout.watchedCB.isChecked
+                val rating = commonLayout.starsRB.rating
+                val stars = rating.toInt()
+                val genre = commonLayout.genderSP.toString()
+                val type = commonLayout.typeSP.toString()
+                val img = selectedImageUri?.let { getImageBytes(it) }
+
+                val movie = Movie(0, name, production, minutes, watched, stars, genre, type, releasedYear, img)
+
+                viewModel.insertMovie(movie)
+                Snackbar.make(
+                    fragmentCreateMovieBinding.root,
+                    "Filme adicionado com sucesso!",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                findNavController().popBackStack()
+            } else {
+                Toast.makeText(commonLayout.nameET.context, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_movie, container, false)
+    private fun getImageBytes(selectedImageUri: Uri?): ByteArray? {
+        try {
+            val inputStream: InputStream? = requireContext().contentResolver.openInputStream(selectedImageUri!!)
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+            val stream = ByteArrayOutputStream()
+
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+            return stream.toByteArray()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
+    private fun openGallery() {
+        Log.d("MyApp", "openGallery() called")
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, Companion.REQUEST_IMAGE_GALLERY)
+    }
+
+    private fun validate(): Boolean {
+        if (
+            fragmentCreateMovieBinding.commonLayout.nameET.text.isEmpty() ||
+            fragmentCreateMovieBinding.commonLayout.releasedYearET.text.isEmpty() ||
+            fragmentCreateMovieBinding.commonLayout.minutesET.text.isEmpty() ||
+            fragmentCreateMovieBinding.commonLayout.productionET.text.isEmpty()
+        ) {
+            return false
+        }
+        return true
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.d("MyApp", "onActivityResult() called")
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == Activity.RESULT_OK && data != null) {
+            selectedImageUri = data.data
+            val imageBytes = selectedImageUri?.let { getImageBytes(it) }
+            imageBytes?.let {
+                fragmentCreateMovieBinding.commonLayout.imgIV.setImageBitmap(BitmapFactory.decodeByteArray(it, 0, it.size))
+            }
+        }
+    }
+
+    private fun convertBitmapToByteArray(bitmap: Bitmap): ByteArray {
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+        return stream.toByteArray()
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CreateMovieFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CreateMovieFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        private const val REQUEST_IMAGE_GALLERY = 1
     }
 }

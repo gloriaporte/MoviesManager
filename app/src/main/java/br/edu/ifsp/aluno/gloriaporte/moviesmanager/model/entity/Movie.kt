@@ -13,7 +13,7 @@ class Movie (
     val watched: Boolean = false,
     val stars: Int? = null,
     val genre: String,
-    val imagePath: String,
     val type: String,
-    val releasedYear: String
-)
+    val releasedYear: String,
+    val image: ByteArray?
+    )
