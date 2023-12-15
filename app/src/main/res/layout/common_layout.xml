@@ -17,6 +17,7 @@
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            android:visibility="gone"
             android:contentDescription="@string/capa_do_filme" />
 
         <Button
@@ -26,6 +27,7 @@
             android:gravity="center"
             android:backgroundTint="@color/third_800"
             android:text="@string/adicionar_foto_de_capa"
+            android:visibility="gone"
             android:textColor="@color/third_200" />
 
         <!--  Nome  -->
