@@ -14,17 +14,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.motion.widget.TransitionBuilder.validate
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import br.edu.ifsp.aluno.gloriaporte.moviesmanager.R
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.controller.MovieViewModel
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.controller.MovieViewModelFactory
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.databinding.FragmentCreateMovieBinding
+import br.edu.ifsp.aluno.gloriaporte.moviesmanager.model.entity.Gender
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.model.entity.Movie
+import br.edu.ifsp.aluno.gloriaporte.moviesmanager.model.entity.Type
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.view.adapter.GenderAdapter
-import br.edu.ifsp.aluno.gloriaporte.moviesmanager.view.adapter.MovieAdapter
+import br.edu.ifsp.aluno.gloriaporte.moviesmanager.view.adapter.TypeAdapter
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.commons.io.output.ByteArrayOutputStream
 import java.io.IOException
@@ -34,6 +33,8 @@ class CreateMovieFragment : Fragment() {
     private lateinit var fragmentCreateMovieBinding: FragmentCreateMovieBinding
     private lateinit var viewModel: MovieViewModel
     private var selectedImageUri: Uri? = null
+    private lateinit var selectedGender: Gender
+    private lateinit var selectedType: Type
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,29 +45,40 @@ class CreateMovieFragment : Fragment() {
         fragmentCreateMovieBinding = FragmentCreateMovieBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, factory).get(MovieViewModel::class.java)
 
-        fragmentCreateMovieBinding.apply {
-            (activity as? AppCompatActivity)?.supportActionBar?.subtitle = getString(R.string.create_movie)
-            fragmentCreateMovieBinding.commonLayout.imgIV.visibility = View.GONE
-        }
         return fragmentCreateMovieBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imageButton = fragmentCreateMovieBinding.commonLayout.imageBT
-
-        imageButton.setOnClickListener {
-            openGallery()
-        }
-
-
-        viewModel = ViewModelProvider(this)[MovieViewModel::class.java]
-
         val commonLayout = fragmentCreateMovieBinding.commonLayout
+        viewModel = ViewModelProvider(this)[MovieViewModel::class.java]
 
         commonLayout.imageBT.setOnClickListener {
             openGallery()
+        }
+
+        commonLayout.genderSP.adapter = GenderAdapter(requireContext(), Gender.values())
+        commonLayout.typeSP.adapter = TypeAdapter(requireContext(), Type.values())
+
+        commonLayout.genderSP.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedGender = Gender.values()[position]
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Nada a ser feito aqui
+            }
+        }
+
+        commonLayout.typeSP.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                selectedType = Type.values()[position]
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Nada a ser feito aqui
+            }
         }
 
         fragmentCreateMovieBinding.commonLayout.saveBt.setOnClickListener {
@@ -78,11 +90,9 @@ class CreateMovieFragment : Fragment() {
                 val watched = commonLayout.watchedCB.isChecked
                 val rating = commonLayout.starsRB.rating
                 val stars = rating.toInt()
-                val genre = commonLayout.genderSP.toString()
-                val type = commonLayout.typeSP.toString()
                 val img = selectedImageUri?.let { getImageBytes(it) }
 
-                val movie = Movie(0, name, production, minutes, watched, stars, genre, type, releasedYear, img)
+                val movie = Movie(0, name, production, minutes, watched, stars, selectedGender, selectedType, releasedYear, img)
 
                 viewModel.insertMovie(movie)
                 Snackbar.make(

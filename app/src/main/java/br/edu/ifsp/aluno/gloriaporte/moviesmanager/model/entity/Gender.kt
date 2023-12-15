@@ -3,7 +3,7 @@ package br.edu.ifsp.aluno.gloriaporte.moviesmanager.model.entity
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.R
 
 enum class Gender (
-    private val description: String,
+    val description: String,
     val icon: Int = R.drawable.baseline_list_24
 ) {
     ROMANCE (
@@ -12,30 +12,26 @@ enum class Gender (
     ),
     HORROR (
         "Terror",
-        //icone
-    ),
-    TRASH (
-        "Trash",
-        //icone
+        R.mipmap.ic_horror
     ),
     THRILLER (
         "Suspense",
-        //icone
+        R.mipmap.ic_thriller
     ),
     COMEDY (
         "Comédia",
-        //icone
+        R.mipmap.ic_comedia
     ),
     SLASHER (
         "Slasher",
-        //icone
+        R.mipmap.ic_slasher
     ),
     FOUND_FOOTAGE (
         "Found Footage",
-//        R.drawable.baseline_videocam_24
+         R.mipmap.ic_foundfootage
     ),
     DRAMA (
         "Drama",
-        //icone
+        R.mipmap.ic_drama
     )
 }

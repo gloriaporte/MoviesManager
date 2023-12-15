@@ -7,66 +7,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import br.edu.ifsp.aluno.gloriaporte.moviesmanager.R
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.databinding.GenderHeaderBinding
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.databinding.GenderItemBinding
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.model.entity.Gender
 
 
-class GenderAdapter(context: Context) : ArrayAdapter<Gender>(
-    context, 0, Gender.values()
-) {
+class GenderAdapter(context: Context, private val genders: Array<Gender>) :
+    ArrayAdapter<Gender>(context, R.layout.gender_item, genders) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val inflater = LayoutInflater.from(parent.context)
-        val bindingGender = GenderItemBinding.inflate(inflater, parent, false)
-        val view: View
-        view = bindingGender.root
-        getItem(position)?.let { gender ->
-            setItemGender(bindingGender, gender, true)
-        }
-        return view
+        return createView(position, convertView, parent)
     }
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val inflater = LayoutInflater.from(parent.context)
-        val bindingGender = GenderItemBinding.inflate(inflater, parent, false)
-        val view: View
-        view = bindingGender.root
-        getItem(position)?.let { gender ->
-            setItemGender(bindingGender, gender, false)
-        }
+        return createView(position, convertView, parent)
+    }
+
+    private fun createView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val gender = getItem(position)
+        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.gender_item, parent, false)
+
+        val ivGender: AppCompatImageView = view.findViewById(R.id.ivGender)
+        val tvGender: AppCompatTextView = view.findViewById(R.id.tvGender)
+
+        ivGender.setImageResource(gender?.icon ?: R.mipmap.ic_heart)
+        tvGender.text = gender?.description ?: ""
+
         return view
-    }
-
-    private fun setItemGender(
-        genderItemBinding: GenderItemBinding, gender: Gender, isVisibleArrow: Boolean
-    ) {
-        genderItemBinding.tvGender.text = gender.toString()
-        genderItemBinding.ivGender.setBackgroundDrawable(
-            ContextCompat.getDrawable(
-                context, gender.icon
-            )
-        )
-        genderItemBinding.arrowBackIndicator.isVisible = isVisibleArrow
-    }
-
-    private fun setItemHeader(binding: GenderHeaderBinding, isSelected: Boolean) {
-        when (isSelected) {
-            true -> binding.tvHeader.setCompoundDrawables(
-                null,
-                null,
-                ContextCompat.getDrawable(context, android.R.drawable.arrow_down_float),
-                null
-            )
-
-            false -> binding.tvHeader.setCompoundDrawables(
-                null,
-                null,
-                ContextCompat.getDrawable(context, android.R.drawable.arrow_up_float),
-                null
-            )
-        }
     }
 }

@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-class Movie (
+class Movie(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val name: String,
@@ -12,8 +12,8 @@ class Movie (
     val minutes: Long,
     val watched: Boolean = false,
     val stars: Int? = null,
-    val genre: String,
-    val type: String,
+    val genre: Gender,
+    val type: Type,
     val releasedYear: String,
     val image: ByteArray?
     )
