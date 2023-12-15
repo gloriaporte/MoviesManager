@@ -13,8 +13,8 @@ import br.edu.ifsp.aluno.gloriaporte.moviesmanager.R
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.model.entity.Gender
 
 
-class GenderAdapter(context: Context) :
-    ArrayAdapter<Gender>(context, R.layout.gender_item) {
+class GenderAdapter(context: Context, private val genders: Array<Gender>) :
+    ArrayAdapter<Gender>(context, R.layout.gender_item, genders) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         return createView(position, convertView, parent)
