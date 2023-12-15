@@ -3,6 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="movies_manager">Movies Manager</string>
+    <string name="create_movie">Adicionar Filme</string>
     <string name="title_activity_main">MainActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -51,4 +52,20 @@
     <string name="genero">Gênero</string>
     <string name="nota">Nota</string>
     <string name="titulo">Título</string>
+    <string name="t_tulo_do_filme">Título do Filme</string>
+    <string name="ano_de_lan_amento">Ano de Lançamento</string>
+    <string name="ano_de_lan_amento_do_filme">Ano de Lançamento do Filme</string>
+    <string name="est_dio_ou_produtora">Estúdio ou Produtora</string>
+    <string name="est_dio_ou_produtora_do_filme">Estúdio ou Produtora do Filme</string>
+    <string name="dura_o_em_minutos">Duração em Minutos</string>
+    <string name="dura_o_do_filme_em_minutos">Duração do Filme em Minutos</string>
+    <string name="assisti">Assisti</string>
+    <string name="tipo_de_m_dia">Tipo de Mídia</string>
+    <string name="adicionar_foto_de_capa">Adicionar Foto de Capa</string>
+    <string name="salvar">Salvar</string>
+    <string name="selecione_o_g_nero">Selecione o Gênero</string>
+    <string name="selecione_o_tipo_de_m_dia">Selecione o Tipo de Mídia</string>
+    <string name="qual_sua_nota_para_o_filme">Qual sua nota para o filme?</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="adicionar_filme">Adicionar Filme</string>
 </resources>

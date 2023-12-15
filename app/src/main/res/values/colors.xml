@@ -1,10 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="slate">#adb8c4</color>
+
+    <!-- Cor principal: SLATE BLUE -->
+    <color name="primary">#7662f8</color>
+    <color name="primary_200">#170684</color>
+    <color name="primary_400">#3d21f5</color>
+    <color name="primary_600">#9282f9</color>
+    <color name="primary_800">#c9c1fc</color>
+
+    <!-- Cor secundária: STEEL BLUE  -->
+    <color name="secondary">#4381c1</color>
+    <color name="secondary_200">#1a344e</color>
+    <color name="secondary_400">#34689c</color>
+    <color name="secondary_600">#699bcd</color>
+    <color name="secondary_800">#b4cde6</color>
+
+    <!-- Cor terceira: FRENCH ROSE -->
+    <color name="third">#ed5a8d</color>
+    <color name="third_200">#760d32</color>
+    <color name="third_400">#e61f65</color>
+    <color name="third_600">#f07ba4</color>
+    <color name="third_800">#f8bdd1</color>
+    <color name="third_900">#fbdee8</color>
+
+    <!-- Cor quarta: HONEY DEW -->
+    <color name="fourth">#dff7e7</color>
+    <color name="fourth_200">#26964b</color>
+    <color name="fourth_400">#93e4ae</color>
+    <color name="fourth_600">#e5f8eb</color>
+    <color name="fourth_800">#f2fcf5</color>
+
 </resources>
+
+<!--
+- Tailwind
+
+{
+    'steel_blue': {
+        DEFAULT: '#4381c1',
+        100: '#0d1a27',
+        200: '#1a344e',
+        300: '#274e75',
+        400: '#34689c',
+        500: '#4381c1',
+        600: '#699bcd',
+        700: '#8fb4da',
+        800: '#b4cde6',
+        900: '#dae6f3'
+    },
+    'french_rose': {
+         DEFAULT: '#ed5a8d',
+         100: '#3b0719',
+         200: '#760d32',
+         300: '#b0144a',
+         400: '#e61f65',
+         500: '#ed5a8d',
+         600: '#f07ba4',
+         700: '#f49cbb',
+         800: '#f8bdd1',
+         900: '#fbdee8'
+    },
+    'medium_slate_blue': {
+        DEFAULT: '#7662f8',
+        100: '#0c0342',
+        200: '#170684',
+        300: '#2309c7',
+        400: '#3d21f5',
+        500: '#7662f8',
+        600: '#9282f9',
+        700: '#ada1fb',
+        800: '#c9c1fc',
+        900: '#e4e0fe'
+    },
+    'honeydew': {
+        DEFAULT: '#dff7e7',
+        100: '#134b26',
+        200: '#26964b',
+        300: '#48d176',
+        400: '#93e4ae',
+        500: '#dff7e7',
+        600: '#e5f8eb',
+        700: '#ebfaf0',
+        800: '#f2fcf5',
+        900: '#f8fdfa'
+    }
+}
+
+-->

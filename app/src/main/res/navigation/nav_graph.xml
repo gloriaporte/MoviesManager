@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="br.edu.ifsp.aluno.gloriaporte.moviesmanager.view.FirstFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/movies_manager"
         tools:layout="@layout/fragment_first">
         <action
             android:id="@+id/action_FirstFragment_to_createMovieFragment"
@@ -17,6 +17,6 @@
     <fragment
         android:id="@+id/createMovieFragment"
         android:name="br.edu.ifsp.aluno.gloriaporte.moviesmanager.view.CreateMovieFragment"
-        android:label="fragment_create_movie"
+        android:label="@string/adicionar_filme"
         tools:layout="@layout/fragment_create_movie" />
 </navigation>
