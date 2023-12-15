@@ -1,6 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <!--  Imagem  -->
+        <ImageView
+            android:id="@+id/imgIV"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:contentDescription="@string/capa_do_filme" />
+
+        <Button
+            android:id="@+id/imageBT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:backgroundTint="@color/third_800"
+            android:text="@string/adicionar_foto_de_capa"
+            android:textColor="@color/third_200" />
+
+        <!--  Nome  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/titulo"
+            android:textColor="@color/secondary_400"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/nameET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/t_tulo_do_filme"
+            android:inputType="text"
+            android:textColor="@color/primary_400"
+            android:textColorHint="@color/slate"
+            android:backgroundTint="@color/third"
+            android:textSize="20sp" />
+
+
+        <!--  Ano de Lançamento  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ano_de_lan_amento"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/secondary_400"/>
+
+        <EditText
+            android:id="@+id/releasedYearET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ano_de_lan_amento_do_filme"
+            android:inputType="number"
+            android:maxLength="4"
+            android:textColor="@color/primary_400"
+            android:backgroundTint="@color/third"
+            android:textColorHint="@color/slate"
+            android:textSize="20sp" />
+
+
+        <!--  Estúdio/Produtora  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/est_dio_ou_produtora"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/secondary_400"/>
+
+        <EditText
+            android:id="@+id/productionET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/est_dio_ou_produtora_do_filme"
+            android:inputType="text"
+            android:textColor="@color/primary_400"
+            android:backgroundTint="@color/third"
+            android:textColorHint="@color/slate"
+            android:textSize="20sp" />
+
+
+        <!--  Imagem  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dura_o_em_minutos"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/secondary_400"/>
+
+        <EditText
+            android:id="@+id/minutesET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/dura_o_do_filme_em_minutos"
+            android:inputType="number"
+            android:textColor="@color/primary_400"
+            android:textColorHint="@color/slate"
+            android:backgroundTint="@color/third"
+            android:textSize="20sp" />
+
+        <!--  Tipo de Mídia (VHS ou DVD)  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tipo_de_m_dia"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/secondary_400"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/typeSP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/third_900"
+            android:minHeight="50dp"
+            android:popupBackground="@color/third_900"
+            android:spinnerMode="dropdown"
+            tools:listitem="@layout/type_item" />
+
+        <!--  Gênero  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/genero"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/secondary_400"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/genderSP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/third_900"
+            android:minHeight="48dp"
+            android:popupBackground="@color/third_900"
+            android:spinnerMode="dropdown"
+            tools:listitem="@layout/gender_item" />
+
+
+        <!--  Assistido  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/watchedCB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:buttonTint="@color/third"
+            />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/assisti"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:textColor="@color/secondary_400"/>
+
+        </LinearLayout>
+
+
+        <!--  Nota  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nota"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/secondary_400"/>
+
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/starsRB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:max="10"
+            android:numStars="5"
+            android:stepSize="0.5" />
+
+
+        <!-- Salvar -->
+        <Button
+            android:id="@+id/saveBt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:backgroundTint="@color/third_800"
+            android:text="@string/salvar"
+            android:textColor="@color/third_200" />
+
+    </LinearLayout>
+</ScrollView>

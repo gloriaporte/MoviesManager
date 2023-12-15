@@ -12,7 +12,7 @@
         tools:src="@android:drawable/ic_menu_myplaces" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvGender"
+        android:id="@+id/tvType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
