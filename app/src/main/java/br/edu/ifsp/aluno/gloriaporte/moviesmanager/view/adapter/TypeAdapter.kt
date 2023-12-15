@@ -10,8 +10,8 @@ import br.edu.ifsp.aluno.gloriaporte.moviesmanager.R
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.model.entity.Type
 import android.view.ViewGroup as ViewGroup1
 
-class TypeAdapter(context: Context, private val types: Array<Type>) :
-    ArrayAdapter<Type>(context, R.layout.type_item, types) {
+class TypeAdapter(context: Context) :
+    ArrayAdapter<Type>(context, R.layout.type_item) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup1): View {
         return createView(position, convertView, parent)

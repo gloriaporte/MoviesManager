@@ -7,19 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.R
-import br.edu.ifsp.aluno.gloriaporte.moviesmanager.databinding.GenderHeaderBinding
-import br.edu.ifsp.aluno.gloriaporte.moviesmanager.databinding.GenderItemBinding
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.model.entity.Gender
 
 
-class GenderAdapter(context: Context, private val genders: Array<Gender>) :
-    ArrayAdapter<Gender>(context, R.layout.gender_item, genders) {
+class GenderAdapter(context: Context) :
+    ArrayAdapter<Gender>(context, R.layout.gender_item) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         return createView(position, convertView, parent)

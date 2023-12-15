@@ -58,8 +58,8 @@ class CreateMovieFragment : Fragment() {
             openGallery()
         }
 
-        commonLayout.genderSP.adapter = GenderAdapter(requireContext(), Gender.values())
-        commonLayout.typeSP.adapter = TypeAdapter(requireContext(), Type.values())
+        commonLayout.genderSP.adapter = GenderAdapter(requireContext())
+        commonLayout.typeSP.adapter = TypeAdapter(requireContext())
 
         commonLayout.genderSP.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

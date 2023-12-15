@@ -1,20 +1,16 @@
 package br.edu.ifsp.aluno.gloriaporte.moviesmanager.view.adapter
 
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import br.edu.ifsp.aluno.gloriaporte.moviesmanager.R
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.databinding.TileMovieBinding
 import br.edu.ifsp.aluno.gloriaporte.moviesmanager.model.entity.Movie
-import com.bumptech.glide.Glide
 
-class MovieAdapter(private val movieList: List<Movie>, private val imageList: List<ByteArray?>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private val movieList: List<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     lateinit var movieListener: OnMovieClickListener
     private lateinit var tileMovieBinding: TileMovieBinding
-    val movieAdapter = MovieAdapter(movieList, imageList)
+    val movieAdapter = MovieAdapter(movieList)
 
     inner class MovieViewHolder(view: TileMovieBinding): RecyclerView.ViewHolder(view.root) {
         var nameVH = view.nameTv

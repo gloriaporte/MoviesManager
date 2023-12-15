@@ -13,10 +13,17 @@
         <action
             android:id="@+id/action_FirstFragment_to_createMovieFragment"
             app:destination="@id/createMovieFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
     </fragment>
     <fragment
         android:id="@+id/createMovieFragment"
         android:name="br.edu.ifsp.aluno.gloriaporte.moviesmanager.view.CreateMovieFragment"
         android:label="@string/adicionar_filme"
         tools:layout="@layout/fragment_create_movie" />
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="br.edu.ifsp.aluno.gloriaporte.moviesmanager.view.MovieFragment"
+        android:label="MovieFragment" />
 </navigation>

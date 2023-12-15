@@ -11,7 +11,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="movie_list">Lista de Filmes</string>
-
+    <string name="details_movie_view">Detalhes do Filme</string>
     <string name="capa_do_filme">Capa do Filme</string>
     <string name="assistido">Assistido</string>
     <string name="genero">Gênero</string>
@@ -34,4 +34,8 @@
     <string name="cancelar">Cancelar</string>
     <string name="adicionar_filme">Adicionar Filme</string>
     <string name="tipo">Tipo</string>
+    <string name="ordenar_por_nota">Ordenar por Nota</string>
+    <string name="ordenar_por_nome">Ordenar por Nome</string>
+    <string name="atualizar">Atualizar</string>
+    <string name="excluir">Excluir</string>
 </resources>
